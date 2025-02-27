@@ -213,7 +213,7 @@ const SignUp = () => {
             <Link className="text-green cursor-pointer" to="/signin">Sign In</Link>
           </p>
         </div>
-        <div className="w-full p-5  bg-auth-singin bg-cover rounded-bl-lg rounded-tl-lg ">
+        <div className="w-full p-5  bg-auth-singin bg-no-repeat object-cover bg-cover rounded-bl-lg rounded-tl-lg ">
           <img src={logo} alt="" className="" />
         </div>
       </main>

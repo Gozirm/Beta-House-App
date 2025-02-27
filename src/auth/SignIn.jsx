@@ -120,7 +120,7 @@ const SignIn = () => {
             </Link>
           </p>
         </div>
-        <div className="w-full p-5 bg-auth-singup bg-cover rounded-bl-lg rounded-tl-lg ">
+        <div className="w-full p-5 bg-auth-singup bg-no-repeat object-cover bg-cover rounded-bl-lg rounded-tl-lg ">
           <img src={logo} alt="" />
         </div>
       </main>

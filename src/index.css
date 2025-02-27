@@ -11,16 +11,16 @@
   @apply bg-[url(./assets/Home.png)];
 }
 .bg-auth-singup {
-  @apply bg-[url(src/assets/signup.png)] bg-no-repeat;
+  background-image: url(.\assets\signup.png);
 }
 .bg-auth-singin {
-  @apply bg-[url(.\assets\signin.png)] bg-no-repeat object-cover;
+  background-image: url(.\assets\signin.png);
 }
 
 @theme {
   --color-green: #3d9970;
-  --color-green-footer: #035A33;
-  --color-gray-footer: #6F6F6F;
+  --color-green-footer: #035a33;
+  --color-gray-footer: #6f6f6f;
   --color-gray-black: #181a20d1;
   --font-outfit: "Outfit", "sans-serif";
   --background-image: url("https://images.unsplash.com/photo-1634170380004-3b3b3b3b3b3b");
