@@ -10,11 +10,11 @@
 .bg-main {
   @apply bg-[url(./assets/Home.png)];
 }
-.bg-auth-singup {
-  background-image: url(.\assets\signup.png);
+.bg-authUp {
+  @apply bg-[url(.\assets\signup.png)];
 }
-.bg-auth-singin {
-  background-image: url(.\assets\signin.png);
+.bg-authIn {
+  @apply bg-[url(.\assets\signin.png)];
 }
 
 @theme {

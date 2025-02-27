@@ -210,10 +210,12 @@ const SignUp = () => {
           </button>
           <p className="text-center text-gray-black mt-5">
             Already have an account?{" "}
-            <Link className="text-green cursor-pointer" to="/signin">Sign In</Link>
+            <Link className="text-green cursor-pointer" to="/signin">
+              Sign In
+            </Link>
           </p>
         </div>
-        <div className="w-full lg:block hidden p-5  bg-auth-singin bg-no-repeat object-cover bg-cover rounded-bl-lg rounded-tl-lg ">
+        <div className="w-full lg:block hidden p-5  bg-authUp bg-no-repeat object-cover bg-cover rounded-bl-lg rounded-tl-lg ">
           <img src={logo} alt="" className="" />
         </div>
       </main>
