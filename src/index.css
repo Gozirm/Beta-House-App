@@ -11,10 +11,10 @@
   @apply bg-[url(./assets/Home.png)];
 }
 .bg-authUp {
-  @apply bg-[url(.\assets\signup.png)];
+  @apply bg-[url(./assets/signup.png)];
 }
 .bg-authIn {
-  @apply bg-[url(.\assets\signin.png)];
+  @apply bg-[url(./assets/signin.png)];
 }
 
 @theme {
