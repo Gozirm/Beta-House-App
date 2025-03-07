@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import or from "../assets/Frame 115.svg";
 import google from "../assets/🦆 icon _google_.png";
 import logo from "../assets/Beta House.svg";
 import { Link, useNavigate } from "react-router";
+import axios from "axios";
+import toast from "react-hot-toast";
+import Loader from "../Loader";
 
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -33,14 +37,44 @@ const SignUp = () => {
         "You must accept the terms and conditions"
       ),
     }),
-    onSubmit: (values) => {
-      console.log(values);
-      navigate("/home");
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        const fullName = `${values.firstName} ${values.lastName}`;
+        const response = await axios.post(
+          "https://event-app-9x9f.onrender.com/api/users/sign-up",
+          {
+            email: values.email,
+            fullname: fullName,
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.data.success) {
+          toast(response.data.message);
+          navigate("/home");
+        } else {
+          toast.error(response.data.message);
+        }
+        console.log("Successful:", response.data);
+      } catch (error) {
+        toast.error(error.response?.data?.message || "An error occurred during sign up");
+        console.error("Error during sign up:", error);
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
   return (
     <>
+      {isLoading && <Loader />} {/* Show loader when loading */}
       <main className="flex flex-col md:flex-row font-outfit">
         <div className="w-full px-[20px] py-[40px] md:px-[53px] md:py-[84px]">
           <h1 className="font-bold text-[28px] leading-[26px]">
@@ -123,13 +157,11 @@ const SignUp = () => {
                 </div>
               ) : null}
             </div>
-            <div className="space-y-2 mt-5">
-              <label
+            <div 
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
                 Password
-              </label>
               <input
                 type="password"
                 id="password"

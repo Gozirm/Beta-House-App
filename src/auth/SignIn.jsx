@@ -5,6 +5,9 @@ import or from "../assets/Frame 115.svg";
 import google from "../assets/🦆 icon _google_.png";
 import logo from "../assets/Beta House.svg";
 import { Link, useNavigate } from "react-router";
+import axios from "axios";
+import toast from "react-hot-toast";
+
 const SignIn = () => {
   const navigate = useNavigate();
   const formik = useFormik({
@@ -20,11 +23,47 @@ const SignIn = () => {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
-      navigate("/home");
+    onSubmit: async (values) => {
+      const payload = {
+        email: values.email,
+        password: values.password,
+      };
+
+      try {
+        const response = await axios.post(
+          "https://event-app-9x9f.onrender.com/api/users/sign-in",
+          payload,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.data.success) {
+          toast.success(response.data.message);
+          localStorage.setItem("mubby-event-token", response.data.user.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          navigate("/home");
+          console.log("Login successful:", response.data);
+        } else {
+          toast.error(response.data.errMsg || "User not found");
+        }
+      } catch (error) {
+        console.error("Error during sign in:", error);
+        if (error.response) {
+          toast.error(
+            error.response.data.message || "An error occurred during sign in."
+          );
+        } else if (error.request) {
+          toast.error("No response received from the server.");
+        } else {
+          toast.error("Error: " + error.message);
+        }
+      }
     },
   });
+
   return (
     <>
       <main className="flex flex-col md:flex-row font-outfit">
@@ -104,7 +143,7 @@ const SignIn = () => {
               type="submit"
               className="bg-green w-full p-4 rounded-2xl text-white mt-5"
             >
-              Sign Up
+              Sign In
             </button>
           </form>
           <img src={or} alt="" className="m-auto mt-4" />
